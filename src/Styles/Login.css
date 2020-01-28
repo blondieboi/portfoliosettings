@@ -1,0 +1,96 @@
+.background {
+	background-image: url(../Assets/bb2.webp);
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.overlay {
+	background-color: rgba(0, 0, 0, 0.85);
+	height: 100%;
+}
+
+.login-wrapper {
+	width: 80%;
+	margin: auto;
+	max-width: 600px;
+	padding-top: 100px;
+	color: white;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+	font-size: large;
+	font-weight: bolder;
+}
+
+input {
+	margin-top: 5px;
+	margin-bottom: 20px;
+	padding: 10px 10px;
+	font-size: medium;
+	background: none;
+	border: 1px solid white;
+	color: white;
+	font-family: inherit;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	transition: background-color 5000s ease-in-out 0s;
+	-webkit-text-fill-color: white !important;
+}
+
+input:focus {
+	outline: none;
+	border: 1px solid #9e6fc3;
+}
+
+button {
+	color: white;
+	padding: 20px 40px;
+	border: none;
+	font-family: inherit;
+	font-weight: bolder;
+	font-size: large;
+	background-color: #9e6fc3;
+	max-width: 180px;
+}
+
+button:hover {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+b {
+	color: #9e6fc3;
+	font-weight: bold;
+}
+
+h1,
+h4 {
+	padding: 0;
+	margin: 0;
+}
+
+.greeting-wrapper {
+	padding-bottom: 40px;
+}
+
+.title {
+	padding-bottom: 5px;
+}
