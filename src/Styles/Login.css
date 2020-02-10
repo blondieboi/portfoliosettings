@@ -24,14 +24,14 @@
 	flex-direction: column;
 }
 
-label {
+.login-label {
 	display: flex;
 	flex-direction: column;
 	font-size: large;
 	font-weight: bolder;
 }
 
-input {
+.login-input {
 	margin-top: 5px;
 	margin-bottom: 20px;
 	padding: 10px 10px;
@@ -55,12 +55,13 @@ select:-webkit-autofill:focus {
 	-webkit-text-fill-color: white !important;
 }
 
-input:focus {
+login-input:focus {
 	outline: none;
 	border: 1px solid #9e6fc3;
 }
 
-button {
+button,
+input[type="submit"] {
 	color: white;
 	padding: 20px 40px;
 	border: none;
@@ -71,7 +72,8 @@ button {
 	max-width: 180px;
 }
 
-button:hover {
+button:hover,
+input[type="submit"] {
 	cursor: pointer;
 	opacity: 0.9;
 }

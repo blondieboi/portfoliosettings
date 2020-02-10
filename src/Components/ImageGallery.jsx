@@ -1,39 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Styles/Gallery.css";
-import data from "../Mock/gallery.json";
+
+import app from "../fireBase";
+import ImageTable from "./ImageTable";
+import Modal from "./Modal";
+
+const database = app.database();
 
 const ImageGallery = () => {
-	const [isEdit, setIsEdit] = useState(false);
+	const [data, setData] = useState([]);
+	const [modalActive, setModalActive] = useState(false);
 
-	const handleClick = () => {
-		setIsEdit(!isEdit);
+	useEffect(() => {
+		database.ref("GalleryImages").once("value", function(snapshot) {
+			snapshot.forEach(function(childSnapshot) {
+				var childData = childSnapshot.val();
+				setData(oldArray => [...oldArray, childData]);
+			});
+		});
+	}, []);
+
+	const displayModal = () => {
+		setModalActive(!modalActive);
 	};
-
-	const imageTable = Object.keys(data).map((key, index) => (
-		<div key={key} className="gallery-element">
-			<div className="gallery-left">
-				<p>Name: {data[index].name}</p>
-				<p>Placement: {data[index].placement}</p>
-				<p>ID: {data[index].id}</p>
-				<p>Size: {data[index].size}</p>
-			</div>
-			<div className="gallery-right">
-				<img
-					className="gallery-image"
-					src={data[index].urlWebp}
-					alt="portfolio"
-				/>
-			</div>
-		</div>
-	));
 
 	return (
 		<div className="gallery-wrapper">
 			<div className="gallery-header">
 				<h3>Image Gallery</h3>
-				<button onClick={handleClick}>{isEdit ? "Save" : "Edit"}</button>
+				<button onClick={displayModal}>{modalActive ? "x" : "+"}</button>
 			</div>
-			{imageTable}
+			{modalActive ? <Modal /> : ""}
+			<ImageTable data={data} />
 		</div>
 	);
 };

@@ -1,16 +1,16 @@
 import React from "react";
-import app from "../fireBase";
 import "../Styles/Home.css";
 import ImageGallery from "../Components/ImageGallery";
-
-//
+import Header from "../Components/Header";
 
 const Home = () => {
 	return (
-		<div className="home-wrapper">
-			<h1>Portfolio Settings</h1>
-			<ImageGallery />
-			<button onClick={() => app.auth().signOut()}>Sign out</button>
+		<div>
+			<Header />
+			<div className="home-wrapper">
+				<h1>Portfolio Settings</h1>
+				<ImageGallery />
+			</div>
 		</div>
 	);
 };
