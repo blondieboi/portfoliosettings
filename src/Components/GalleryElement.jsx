@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import app from "../fireBase";
+import PlacementSelector from "./PlacementSelector";
 
 const GalleryElement = props => {
 	const [isEdit, setIsEdit] = useState(false);
@@ -114,6 +115,7 @@ const GalleryElement = props => {
 			<div className="gallery-right">
 				<img className="gallery-image" src={data.url} alt="portfolio" />
 			</div>
+			<PlacementSelector />
 		</div>
 	);
 };

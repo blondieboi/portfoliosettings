@@ -9,7 +9,7 @@ const database = app.database();
 
 const ImageGallery = () => {
 	const [data, setData] = useState([]);
-	const [modalActive, setModalActive] = useState(true);
+	const [modalActive, setModalActive] = useState(false);
 
 	useEffect(() => {
 		database
