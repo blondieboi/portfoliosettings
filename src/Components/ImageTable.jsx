@@ -6,7 +6,7 @@ const ImageTable = props => {
 		return (
 			<GalleryElement
 				key={props.data[item].id}
-				child={item}
+				child={props.data[item].id}
 				data={props.data[item]}
 			/>
 		);

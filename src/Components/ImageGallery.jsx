@@ -9,15 +9,18 @@ const database = app.database();
 
 const ImageGallery = () => {
 	const [data, setData] = useState([]);
-	const [modalActive, setModalActive] = useState(false);
+	const [modalActive, setModalActive] = useState(true);
 
 	useEffect(() => {
-		database.ref("GalleryImages").once("value", function(snapshot) {
-			snapshot.forEach(function(childSnapshot) {
-				var childData = childSnapshot.val();
-				setData(oldArray => [...oldArray, childData]);
+		database
+			.ref("GalleryImages")
+			.orderByChild("placement")
+			.once("value", function(snapshot) {
+				snapshot.forEach(function(childSnapshot) {
+					var childData = childSnapshot.val();
+					setData(oldArray => [...oldArray, childData]);
+				});
 			});
-		});
 	}, []);
 
 	const displayModal = () => {

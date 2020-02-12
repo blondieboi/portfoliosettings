@@ -4,3 +4,53 @@
 	padding: 30px;
 	font-size: large;
 }
+
+.modal-form {
+	display: flex;
+	flex-direction: column;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+.file-upload-button {
+	color: white;
+	padding: 20px 40px;
+	border: none;
+	font-family: inherit;
+	font-weight: bolder;
+	font-size: large;
+	background-color: #9e6fc3;
+	max-width: 180px;
+	margin: 10px 0px;
+	text-align: center;
+}
+
+.file-upload-button:hover {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+.modal-input-label {
+	margin-bottom: 10px;
+}
+
+.modal-input {
+	font-family: inherit;
+	font-size: large;
+	border: none;
+	background: none;
+	border-bottom: 1px solid black;
+	margin-left: 10px;
+	max-width: 15rem;
+}
+
+.modal-input:focus {
+	outline: none;
+}
+
+.modal-input:disabled {
+	border: none;
+	color: black;
+}

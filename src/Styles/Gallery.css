@@ -29,6 +29,8 @@
 .gallery-form {
 	padding-top: 10px;
 	padding-bottom: 10px;
+	display: flex;
+	flex-direction: column;
 }
 
 .gallery-form > label {
@@ -54,4 +56,8 @@
 .text-field:disabled {
 	background: none;
 	border: none;
+}
+
+.gallery-element-button {
+	margin-top: 10px;
 }

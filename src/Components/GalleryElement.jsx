@@ -8,6 +8,33 @@ const GalleryElement = props => {
 	let child = props.child;
 
 	const database = app.database();
+	const storage = app.storage();
+
+	const handleDelete = child => e => {
+		console.log(child);
+		e.preventDefault();
+		database
+			.ref("GalleryImages")
+			.child(`${child}`)
+			.remove()
+			.then(function() {
+				console.log("Remove succeeded.");
+			})
+			.catch(function(error) {
+				console.log("Remove failed: " + error.message);
+			});
+
+		storage
+			.ref()
+			.child(data.storageName)
+			.delete()
+			.then(function() {
+				console.log("Remove succeeded.");
+			})
+			.catch(function(error) {
+				console.log("Remove failed: " + error.message);
+			});
+	};
 
 	const handleChange = e => {
 		e.preventDefault();
@@ -17,11 +44,10 @@ const GalleryElement = props => {
 	const handleClick = child => e => {
 		e.preventDefault();
 		const { name, placement } = e.target.elements;
-		console.log(child);
 		if (isEdit) {
 			database
 				.ref("GalleryImages")
-				.child(`${child}`)
+				.child(`${props.child}`)
 				.update({
 					name: name.value
 				});
@@ -73,7 +99,17 @@ const GalleryElement = props => {
 						disabled
 					/>
 				</label>
-				<input type="submit" value={isEdit ? "Save" : "Edit"} />
+				<input
+					className="gallery-element-button"
+					type="submit"
+					value={isEdit ? "Save" : "Edit"}
+				/>
+				<input
+					className="gallery-element-button"
+					type="submit"
+					onClick={handleDelete(child)}
+					value="Delete"
+				/>
 			</form>
 			<div className="gallery-right">
 				<img className="gallery-image" src={data.url} alt="portfolio" />
