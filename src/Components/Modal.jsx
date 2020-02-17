@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import "../Styles/Modal.css";
 import app from "../fireBase";
 
-const Modal = () => {
+const Modal = ({ availablePlacements }) => {
 	const [file, setFile] = useState(null);
 	const [fileName, setFileName] = useState("");
 	const [fileSize, setFileSize] = useState("");
 	const [imageName, setImageName] = useState("");
+	const [placement, setPlacement] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const ref = app.storage().ref();
@@ -21,7 +22,6 @@ const Modal = () => {
 			.put(file)
 			.then(snapshot => snapshot.ref.getDownloadURL())
 			.then(url => {
-				setIsLoading(false);
 				database
 					.ref("GalleryImages")
 					.child(`${id}`)
@@ -33,6 +33,8 @@ const Modal = () => {
 						size: `${fileSize}kb`,
 						url: url
 					});
+				setIsLoading(false);
+				window.location.reload();
 			});
 	};
 
@@ -46,6 +48,16 @@ const Modal = () => {
 	const handleNameChange = e => {
 		setFileName(e.target.value);
 	};
+
+	const handleSelectChange = place => {
+		//make it do stuff
+	};
+
+	const options = availablePlacements.map(placement => (
+		<option key={placement} value={placement}>
+			{placement}
+		</option>
+	));
 
 	return (
 		<div className="modal-wrapper">
@@ -61,12 +73,16 @@ const Modal = () => {
 					/>
 				</label>
 				<label className="modal-input-label">
+					Placement:
+					<select onChange={handleSelectChange(this)}>{options}</select>
+				</label>
+				<label className="modal-input-label">
 					Size:
 					<input
 						className="modal-input"
 						type="text"
 						name="name"
-						value={fileSize}
+						value={fileSize > 0 ? `${Math.round(fileSize / 1000000)} MB` : ""}
 						disabled
 					/>
 				</label>
@@ -80,6 +96,16 @@ const Modal = () => {
 						disabled
 					/>
 				</label>
+				{file ? (
+					<img
+						className="preview-image"
+						src={URL.createObjectURL(file)}
+						alt="preview"
+					/>
+				) : (
+					""
+				)}
+
 				<label htmlFor="file-upload" className="file-upload-button">
 					Select Image
 				</label>
@@ -90,7 +116,9 @@ const Modal = () => {
 					accept="image/x-png,"
 					onChange={handleFileSelect}
 				/>
-				<button onClick={handleClick}>{isLoading ? "..." : "Save"}</button>
+				<button onClick={handleClick}>
+					{isLoading ? <div className="loader"></div> : "Save"}
+				</button>
 			</form>
 		</div>
 	);

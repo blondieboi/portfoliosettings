@@ -4,11 +4,17 @@
 	align-items: center;
 }
 
+.modal-button {
+	max-width: none;
+	width: 250px;
+}
+
 .gallery-header {
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid black;
+
 	padding-bottom: 10px;
+	padding-top: 30px;
 }
 
 .gallery-right {

@@ -2,6 +2,20 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px 20px;
-	border-bottom: 1px solid black;
+	padding: 20px 20px;
+	background-color: #9e6fc3;
+	color: white;
+	-webkit-box-shadow: -1px -8px 6px 11px rgba(50, 50, 50, 0.91);
+	-moz-box-shadow: -1px -8px 6px 11px rgba(50, 50, 50, 0.91);
+	box-shadow: -1px -8px 6px 11px rgba(50, 50, 50, 0.91);
+}
+
+.logout-button {
+	font-weight: bold;
+	font-size: large;
+}
+
+.logout-button:hover {
+	text-decoration: underline;
+	cursor: pointer;
 }

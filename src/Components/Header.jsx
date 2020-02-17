@@ -6,7 +6,9 @@ const Header = () => {
 	return (
 		<div className="header-wrapper">
 			<h1>JW</h1>
-			<button onClick={() => app.auth().signOut()}>Sign out</button>
+			<div className="logout-button" onClick={() => app.auth().signOut()}>
+				Sign out
+			</div>
 		</div>
 	);
 };

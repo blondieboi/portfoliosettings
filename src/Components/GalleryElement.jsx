@@ -5,6 +5,8 @@ import PlacementSelector from "./PlacementSelector";
 const GalleryElement = props => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [imageName, setImageName] = useState(props.data.name);
+	const [isLoading, setIsLoading] = useState(false);
+	const [isLoadingSave, setIsLoadingSave] = useState(false);
 	let data = props.data;
 	let child = props.child;
 
@@ -12,7 +14,7 @@ const GalleryElement = props => {
 	const storage = app.storage();
 
 	const handleDelete = child => e => {
-		console.log(child);
+		setIsLoading(true);
 		e.preventDefault();
 		database
 			.ref("GalleryImages")
@@ -31,9 +33,12 @@ const GalleryElement = props => {
 			.delete()
 			.then(function() {
 				console.log("Remove succeeded.");
+				setIsLoading(false);
+				window.location.reload();
 			})
 			.catch(function(error) {
 				console.log("Remove failed: " + error.message);
+				setIsLoading(false);
 			});
 	};
 
@@ -43,6 +48,8 @@ const GalleryElement = props => {
 	};
 
 	const handleClick = child => e => {
+		setIsLoadingSave(true);
+
 		e.preventDefault();
 		const { name, placement } = e.target.elements;
 		if (isEdit) {
@@ -55,7 +62,10 @@ const GalleryElement = props => {
 		} else {
 		}
 		setIsEdit(!isEdit);
+		setIsLoadingSave(false);
+		window.location.reload();
 	};
+
 	return (
 		<div className="gallery-element">
 			<form className="gallery-form" onSubmit={handleClick(child)}>
@@ -100,22 +110,26 @@ const GalleryElement = props => {
 						disabled
 					/>
 				</label>
-				<input
-					className="gallery-element-button"
-					type="submit"
-					value={isEdit ? "Save" : "Edit"}
-				/>
-				<input
+				<button className="gallery-element-button" type="submit">
+					{isEdit ? (
+						"Save"
+					) : isLoadingSave ? (
+						<div className="loader"></div>
+					) : (
+						"Edit"
+					)}
+				</button>
+				<button
 					className="gallery-element-button"
 					type="submit"
 					onClick={handleDelete(child)}
-					value="Delete"
-				/>
+				>
+					{isLoading ? <div className="loader"></div> : "Delete"}
+				</button>
 			</form>
 			<div className="gallery-right">
 				<img className="gallery-image" src={data.url} alt="portfolio" />
 			</div>
-			<PlacementSelector />
 		</div>
 	);
 };
