@@ -7,7 +7,7 @@ const Modal = ({ availablePlacements }) => {
 	const [fileName, setFileName] = useState("");
 	const [fileSize, setFileSize] = useState("");
 	const [imageName, setImageName] = useState("");
-	const [placement, setPlacement] = useState(null);
+	const [placement, setPlacement] = useState(availablePlacements[0]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const ref = app.storage().ref();
@@ -29,7 +29,7 @@ const Modal = ({ availablePlacements }) => {
 						id: id,
 						storageName: file.name,
 						name: fileName,
-						placement: 8,
+						placement: placement,
 						size: `${fileSize}kb`,
 						url: url
 					});
@@ -49,8 +49,8 @@ const Modal = ({ availablePlacements }) => {
 		setFileName(e.target.value);
 	};
 
-	const handleSelectChange = place => {
-		//make it do stuff
+	const handleSelectChange = e => {
+		setPlacement(e.target.value);
 	};
 
 	const options = availablePlacements.map(placement => (
@@ -74,7 +74,9 @@ const Modal = ({ availablePlacements }) => {
 				</label>
 				<label className="modal-input-label">
 					Placement:
-					<select onChange={handleSelectChange(this)}>{options}</select>
+					<select onChange={handleSelectChange} value={placement}>
+						{options}
+					</select>
 				</label>
 				<label className="modal-input-label">
 					Size:
@@ -105,7 +107,6 @@ const Modal = ({ availablePlacements }) => {
 				) : (
 					""
 				)}
-
 				<label htmlFor="file-upload" className="file-upload-button">
 					Select Image
 				</label>

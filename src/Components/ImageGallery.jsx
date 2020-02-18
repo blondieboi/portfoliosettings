@@ -12,7 +12,7 @@ const ImageGallery = () => {
 	const [modalActive, setModalActive] = useState(false);
 
 	let takenPlacements = [];
-	data.map(item => takenPlacements.push(item.placement));
+	data.map(item => takenPlacements.push(parseInt(item.placement)));
 
 	let totalPlacements = [];
 	for (let i = 1; i < 21; i++) {
@@ -50,7 +50,7 @@ const ImageGallery = () => {
 			{modalActive ? (
 				<Modal availablePlacements={availablePlacements} />
 			) : (
-				<ImageTable data={data} />
+				<ImageTable data={data} takenPlacements={takenPlacements} />
 			)}
 		</div>
 	);

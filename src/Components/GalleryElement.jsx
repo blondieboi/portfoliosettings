@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import app from "../fireBase";
-import PlacementSelector from "./PlacementSelector";
 
-const GalleryElement = props => {
+const GalleryElement = ({ data, child }) => {
 	const [isEdit, setIsEdit] = useState(false);
-	const [imageName, setImageName] = useState(props.data.name);
+	const [imageName, setImageName] = useState(data.name);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLoadingSave, setIsLoadingSave] = useState(false);
-	let data = props.data;
-	let child = props.child;
+	const [placement, setPlacement] = useState(data.placement);
 
 	const database = app.database();
 	const storage = app.storage();
@@ -47,24 +45,41 @@ const GalleryElement = props => {
 		setImageName(e.target.value);
 	};
 
-	const handleClick = child => e => {
+	const handleClick = () => e => {
 		setIsLoadingSave(true);
 
 		e.preventDefault();
-		const { name, placement } = e.target.elements;
+		const { name } = e.target.elements;
 		if (isEdit) {
 			database
 				.ref("GalleryImages")
-				.child(`${props.child}`)
+				.child(`${child}`)
 				.update({
-					name: name.value
+					name: name.value,
+					placement: placement
 				});
+			window.location.reload();
 		} else {
 		}
 		setIsEdit(!isEdit);
 		setIsLoadingSave(false);
-		window.location.reload();
 	};
+
+	const handleSelectChange = e => {
+		setPlacement(e.target.value);
+	};
+
+	let placementList = [];
+	for (let i = 1; i < 21; i++) {
+		placementList.push(i);
+	}
+	const options = placementList.map(option => {
+		return (
+			<option key={option} value={option}>
+				{option}
+			</option>
+		);
+	});
 
 	return (
 		<div className="gallery-element">
@@ -80,15 +95,15 @@ const GalleryElement = props => {
 						disabled={!isEdit}
 					/>
 				</label>
-				<label>
+				<label className="modal-input-label">
 					Placement:
-					<input
-						className="text-field"
-						type="text"
-						name="placement"
-						value={data.placement}
-						disabled
-					/>
+					<select
+						onChange={handleSelectChange}
+						value={placement}
+						disabled={!isEdit}
+					>
+						{options}
+					</select>
 				</label>
 				<label>
 					id:

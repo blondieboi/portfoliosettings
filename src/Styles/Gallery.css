@@ -67,3 +67,41 @@
 .gallery-element-button {
 	margin-top: 10px;
 }
+
+select {
+	margin-left: 10px;
+	color: black;
+	font-family: inherit;
+	font-size: inherit;
+	background: none;
+	padding-left: 10px;
+}
+
+select:hover {
+	cursor: pointer;
+}
+
+select:disabled {
+	cursor: auto;
+	border: none;
+	background: none;
+	color: black;
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 1px;
+	text-overflow: "";
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+.error-box {
+	background-color: #c62121;
+	color: white;
+	padding: 15px 30px;
+	text-align: center;
+	vertical-align: middle;
+}
