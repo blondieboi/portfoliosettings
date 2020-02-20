@@ -43,6 +43,7 @@ const ImageGallery = () => {
 	return (
 		<div className="gallery-wrapper">
 			<div className="gallery-header">
+				<h1>Portfolio Settings</h1>
 				<button className="modal-button" onClick={displayModal}>
 					{modalActive ? "Close editor" : "Add new image"}
 				</button>

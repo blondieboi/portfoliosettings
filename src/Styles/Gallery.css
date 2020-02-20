@@ -1,7 +1,7 @@
 .gallery-element {
 	display: flex;
-	border-bottom: 1px solid black;
-	align-items: center;
+	border-bottom: 1px solid grey;
+	flex-direction: column;
 }
 
 .modal-button {
@@ -12,9 +12,10 @@
 .gallery-header {
 	display: flex;
 	justify-content: space-between;
-
+	align-items: center;
 	padding-bottom: 10px;
 	padding-top: 30px;
+	margin-bottom: 30px;
 }
 
 .gallery-right {
@@ -35,11 +36,9 @@
 .gallery-form {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	display: flex;
-	flex-direction: column;
 }
 
-.gallery-form > label {
+.form-elements > label {
 	display: flex;
 	font-size: large;
 	margin-bottom: 5px;
@@ -65,7 +64,9 @@
 }
 
 .gallery-element-button {
-	margin-top: 10px;
+	margin-top: 30px;
+	margin-right: 20px;
+	margin-bottom: 40px;
 }
 
 select {
@@ -104,4 +105,19 @@ select::-ms-expand {
 	padding: 15px 30px;
 	text-align: center;
 	vertical-align: middle;
+}
+
+.gallery-top {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+}
+
+.gallery-bottom {
+	display: flex;
+}
+
+.form-elements {
+	display: flex;
+	flex-direction: column;
 }

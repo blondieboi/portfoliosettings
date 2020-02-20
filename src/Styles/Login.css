@@ -74,9 +74,14 @@ input[type="submit"] {
 }
 
 button:hover,
-input[type="submit"] {
+input[type="submit"]:hover {
 	cursor: pointer;
 	opacity: 0.9;
+}
+
+button:focus,
+input[type="submit"]:foxus {
+	outline: none;
 }
 
 b {

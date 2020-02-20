@@ -14,28 +14,32 @@ const Modal = ({ availablePlacements }) => {
 	const database = app.database();
 
 	const handleClick = e => {
-		e.preventDefault();
-		setIsLoading(true);
-		const id = Math.round(Math.random() * 10000000);
-		ref
-			.child(file.name)
-			.put(file)
-			.then(snapshot => snapshot.ref.getDownloadURL())
-			.then(url => {
-				database
-					.ref("GalleryImages")
-					.child(`${id}`)
-					.update({
-						id: id,
-						storageName: file.name,
-						name: fileName,
-						placement: placement,
-						size: `${fileSize}kb`,
-						url: url
-					});
-				setIsLoading(false);
-				window.location.reload();
-			});
+		if (fileSize === "" || fileName === "") {
+			return;
+		} else {
+			e.preventDefault();
+			setIsLoading(true);
+			const id = Math.round(Math.random() * 10000000);
+			ref
+				.child(file.name)
+				.put(file)
+				.then(snapshot => snapshot.ref.getDownloadURL())
+				.then(url => {
+					database
+						.ref("GalleryImages")
+						.child(`${id}`)
+						.update({
+							id: id,
+							storageName: file.name,
+							name: fileName,
+							placement: placement,
+							size: fileSize,
+							url: url
+						});
+					setIsLoading(false);
+					window.location.reload();
+				});
+		}
 	};
 
 	const handleFileSelect = e => {
@@ -84,7 +88,9 @@ const Modal = ({ availablePlacements }) => {
 						className="modal-input"
 						type="text"
 						name="name"
-						value={fileSize > 0 ? `${Math.round(fileSize / 1000000)} MB` : ""}
+						value={
+							fileSize > 0 ? `${Math.round(fileSize / 10000) / 100} MB` : ""
+						}
 						disabled
 					/>
 				</label>

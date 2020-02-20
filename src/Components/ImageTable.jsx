@@ -1,32 +1,23 @@
 import React from "react";
 import GalleryElement from "./GalleryElement";
+import "../Utils/findDuplicates";
+import { findDuplicates } from "../Utils/findDuplicates";
 
-const ImageTable = props => {
-	var object = {};
-	var result = [];
-	props.takenPlacements.forEach(item => {
-		if (!object[item]) object[item] = 0;
-		object[item] += 1;
-	});
+const ImageTable = ({ takenPlacements, data }) => {
+	const duplicates = findDuplicates(takenPlacements);
 
-	for (var prop in object) {
-		if (object[prop] >= 2) {
-			result.push(prop);
-		}
-	}
-
-	const errorModal = result.map(dulpicate => (
+	const errorModal = duplicates.map(dulpicate => (
 		<h2 className="error-box" key={dulpicate}>
 			Warning: Duplicate placement {dulpicate}
 		</h2>
 	));
 
-	const element = props.data.map((key, item) => {
+	const element = data.map((key, item) => {
 		return (
 			<GalleryElement
-				key={props.data[item].id}
-				child={props.data[item].id}
-				data={props.data[item]}
+				key={data[item].id}
+				child={data[item].id}
+				data={data[item]}
 			/>
 		);
 	});

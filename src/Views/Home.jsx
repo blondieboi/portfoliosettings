@@ -8,7 +8,6 @@ const Home = () => {
 		<div>
 			<Header />
 			<div className="home-wrapper">
-				<h1>Portfolio Settings</h1>
 				<ImageGallery />
 			</div>
 		</div>
